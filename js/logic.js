@@ -1,65 +1,48 @@
-import {print, getNumber} from './utils/print.js'
+import {print} from './utils/print.js'
+
 
 const main = () => {
     let actions = ''
     let numb1 = ''
-
+    let getNumber = ''
     return (state) => {
-        let res = []
+
         if (state >= 0 || state == '.') {
-            if (getNumber() == 0) {
-                print(state)
-            }else if (state == '.'){
-                print(0 + '.')
+            if (getNumber == '' && actions == '') {
+                numb1 += state
+                print(numb1)
+                console.log('numb1', numb1,)
             }
-            else {
-                print(getNumber() + state)
+            if (numb1 !== '' && actions !== '') {
+                getNumber += state
+                print(getNumber)
+                console.log('getNumber', getNumber,)
             }
+        }
 
-
-        } else if (state == '+') {
-            numb1 = getNumber()
-            actions = '+'
-            print(0)
-
-        } else if (state == '-') {
-            numb1 = getNumber()
-            actions = '-'
-            print(0)
-
-        } else if (state == 'x') {
-            numb1 = getNumber()
-            actions = '*'
-            print(0)
-
-        } else if (state == '/') {
-            numb1 = getNumber()
-            actions = '/'
-            print(0)
-        }else if(state == '.'){
-            print(0)
-        }else if (state == '=') {
-            console.log(numb1)
+        if (state == '+' || state == '-' || state == 'x' || state == '/') {
+            actions = state
+        } else if (state == '=') {
             if (actions == '+') {
-                print(Number(getNumber()) + Number(numb1))
-                numb1 = getNumber()
+                print(Number(getNumber) + Number(numb1))
+                numb1 = getNumber
             } else if (actions == '-') {
-                print(Number(numb1) - Number(getNumber()))
-                numb1 = getNumber()
-            } else if (actions == '*') {
-                print(Number(getNumber()) * Number(numb1))
-                numb1 = getNumber()
+                print(Number(numb1) - Number(getNumber))
+                numb1 = getNumber
+            } else if (actions == 'x') {
+                print(Number(getNumber) * Number(numb1))
+                numb1 = getNumber
             } else if (actions == '/') {
-                let test = numb1 / getNumber()
-                print(test)
-                numb1 = getNumber()
+                print(numb1 / getNumber)
+                numb1 = getNumber
             }
-        } else if (state == 'С'){
-            console.log('asd')
+        } else if (state == 'С') {
+            getNumber = ''
             print(0)
-        } else if (state == 'АС'){
+        } else if (state == 'АС') {
             numb1 = '';
             actions = '';
+            getNumber = '';
             print(0)
         }
 
